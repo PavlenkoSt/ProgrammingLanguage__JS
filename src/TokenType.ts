@@ -1,9 +1,9 @@
 export default class TokenType {
-    type: string;
+    name: string;
     regex: string;
 
-    constructor(type: string, regex: string){
-        this.type = type;
+    constructor(name: string, regex: string){
+        this.name = name;
         this.regex = regex;
     }
 }
