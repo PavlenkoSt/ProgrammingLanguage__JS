@@ -24,7 +24,8 @@ export default class Parser {
     require(...expected: TokenType[]): Token{
         const token = this.match(...expected);
         if(!token){
-            throw new Error(`На позиции ${this.position} ожидается ${expected}`);
+            throw new Error(`На позиции ${this.position} ожидается ${expected[0].name}`);
         }
+        return token;
     }
 }
