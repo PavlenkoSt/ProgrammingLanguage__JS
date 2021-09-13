@@ -110,5 +110,44 @@ export default class Parser {
         if(node instanceof NumberNode){
             return parseInt(node.number.name);
         }
+
+        if(node instanceof UnOperatorNode){
+            switch(node.operator.type.name){
+                case TokenTypeList.LOG.name: 
+                    console.log(this.run(node.operand));
+                    return
+            }
+        }
+
+        if(node instanceof BinOperatorNode){
+            switch(node.operator.type.name){
+                case TokenTypeList.PLUS.name:
+                    return this.run(node.leftNode) + this.run(node.rightNode);
+                case TokenTypeList.MINUS.name:
+                    return this.run(node.leftNode) - this.run(node.rightNode);
+                case TokenTypeList.ASSIGN.name:
+                    const result = this.run(node.rightNode);
+                    const variableNode = <VariableNode>node.leftNode;
+                    this.scope[variableNode.variable.text] = result;
+                    return result;
+            }
+        }
+
+        if(node instanceof VariableNode){
+            if(this.scope[node.variable.text]){
+                return this.scope[node.variable.text];
+            }else{
+                throw new Error(`Переменная с названием ${node.variable.text} не обнаружена`);
+            }
+        }
+
+        if(node instanceof StatementsNode){
+            node.codeStrings.forEach(codeString => {
+                this.run(codeString);
+            });
+            return;
+        }
+
+        throw new Error(`Ошибка`);
     }   
 }
