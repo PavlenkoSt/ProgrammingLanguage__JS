@@ -1,3 +1,1 @@
-export default class ExpressionNode {
-    
-}
+export default class ExpressionNode {}

@@ -2,8 +2,8 @@ import Lexer from "./Lexer";
 import Parser from "./Parser";
 
 const code = 
-    `код РАВНО 5 ПЛЮС 10 ПЛЮС ( 20 ПЛЮС 20 );
-    ЛОГ код;`;
+    `х РАВНО 5 МИНУС 10 ПЛЮС ( 20 ПЛЮС 20 );
+    ЛОГ х;`;
 
 const lexer = new Lexer(code);
 
